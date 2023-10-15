@@ -6,28 +6,29 @@ const WeatherInfo = ({type, weatherInformation}) => {
     //         console.log(weatherInformation.temperature_2m);
     //     }
     // }, [weatherInformation]);
-    if (!weatherInformation) {
+    if (type === "current" && !weatherInformation.current ||
+        (type === "0" || type === "1" || type === "2") && !weatherInformation.daily){
         return <div>Loading...</div>;
     }
     if(type === "current"){
         console.log(weatherInformation)
         return (
             <div className="weatherBody">
-                <p>Temperature: <b>{weatherInformation.temperature_2m} ℃</b></p>
-                <p>Apparent temperature: <b>{weatherInformation.apparent_temperature} ℃</b></p>
-                <p>Surface pressure: <b>{weatherInformation.apparent_temperature} hPa</b></p>
-                <p>Wind speed: <b>{weatherInformation.windspeed_10m} m/s</b></p>
-                <p>Precipitation: <b>{weatherInformation.precipitation}%</b></p>
+                <p>Temperature: <b>{weatherInformation.current.temperature_2m} ℃</b></p>
+                <p>Apparent temperature: <b>{weatherInformation.current.apparent_temperature} ℃</b></p>
+                <p>Surface pressure: <b>{weatherInformation.current.apparent_temperature} hPa</b></p>
+                <p>Wind speed: <b>{weatherInformation.current.windspeed_10m} m/s</b></p>
+                <p>Precipitation: <b>{weatherInformation.current.precipitation}%</b></p>
             </div>
         );
     } else if(type === "0" || type === "1" || type === "2") {
         return (
             <div className="weatherBody">
-                <p>Max temperature: <b>{weatherInformation.temperature_2m_max[type]} ℃</b></p>
-                <p>Min temperature: <b>{weatherInformation.temperature_2m_min[type]} ℃</b></p>
-                <p>Precipitation sum: <b>{weatherInformation.precipitation_sum[type]} mm</b></p>
-                <p>Sunrise: <b>{weatherInformation.sunrise[type].split("T")[1]}</b></p>
-                <p>Sunset: <b>{weatherInformation.sunset[type].split("T")[1]}</b></p>
+                <p>Max temperature: <b>{weatherInformation.daily.temperature_2m_max[type]} ℃</b></p>
+                <p>Min temperature: <b>{weatherInformation.daily.temperature_2m_min[type]} ℃</b></p>
+                <p>Precipitation sum: <b>{weatherInformation.daily.precipitation_sum[type]} mm</b></p>
+                <p>Sunrise: <b>{weatherInformation.daily.sunrise[type].split("T")[1]}</b></p>
+                <p>Sunset: <b>{weatherInformation.daily.sunset[type].split("T")[1]}</b></p>
             </div>
         )
     } else {

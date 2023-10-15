@@ -16,11 +16,10 @@ const WeatherItem = (props) => {
         getWeatherInfo();
         console.log(weatherInfo);
     }, []);
-
     return(
         <Card className="weatherItem">
             <div><b>{props.day}:</b></div>
-            <WeatherInfo type={props.type} weatherInformation={weatherInfo.daily} />
+            <WeatherInfo type={props.type} weatherInformation={weatherInfo} />
         </Card>
     )
 }

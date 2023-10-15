@@ -10,7 +10,8 @@ const bannerItem = (props) => {
     }
     return(
         <Card className="banner">
-            <span onClick={() => clickHandler("Today", "0")}>Today </span>
+            <span onClick={() => clickHandler("Current", "current")}>Current </span>
+            <span onClick={() => clickHandler("Today", "0")}>| Today </span>
             <span onClick={() => clickHandler("Tomorrow", "1")}>| Tomorrow </span>
             <span onClick={() => clickHandler(DayAfterTomorrowGetter, "2")}>| {DayAfterTomorrowGetter}</span>
         </Card>
