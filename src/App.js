@@ -5,8 +5,7 @@ import WeatherItem from "./components/WeatherItem";
 import {useState} from "react";
 
 const App = () => {
-    const displayedDay = "Today";
-    const [day, setDay] = useState(displayedDay);
+    const [day, setDay] = useState("Current");
     const [type, setType] = useState("current");
   return (
     <div className="App">

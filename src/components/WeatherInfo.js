@@ -7,7 +7,6 @@ const WeatherInfo = ({type, hourly, weatherInformation}) => {
         return <div>Loading...</div>;
     }
     if(type === "current"){
-        console.log(weatherInformation)
         return (
             <div className="weatherBody">
                 <p>Temperature: <b>{weatherInformation.current.temperature_2m} ℃</b></p>
