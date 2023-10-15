@@ -7,14 +7,15 @@ import {useState} from "react";
 const App = () => {
     const displayedDay = "Today";
     const [day, setDay] = useState(displayedDay);
+    const [type, setType] = useState("current");
   return (
     <div className="App">
         <header className="App-header">
             <div className="city">Kraków</div>
-            <BannerItem setDay={setDay}/>
+            <BannerItem setDay={setDay} setType={setType}/>
         </header>
         <div className="App-body">
-            <WeatherItem day={day}/>
+            <WeatherItem day={day} type={type}/>
         </div>
     </div>
   );
