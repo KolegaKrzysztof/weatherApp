@@ -1,13 +1,9 @@
 import React, {useEffect} from "react";
 import "./WeatherInfo.css";
-const WeatherInfo = ({type, weatherInformation}) => {
-    // useEffect(() => {
-    //     if (weatherInformation) {
-    //         console.log(weatherInformation.temperature_2m);
-    //     }
-    // }, [weatherInformation]);
+const WeatherInfo = ({type, hourly, weatherInformation}) => {
     if (type === "current" && !weatherInformation.current ||
-        (type === "0" || type === "1" || type === "2") && !weatherInformation.daily){
+        (type === "0" || type === "1" || type === "2") && !weatherInformation.daily ||
+        type === "hourly" && !weatherInformation.hourly) {
         return <div>Loading...</div>;
     }
     if(type === "current"){
@@ -21,7 +17,7 @@ const WeatherInfo = ({type, weatherInformation}) => {
                 <p>Precipitation: <b>{weatherInformation.current.precipitation}%</b></p>
             </div>
         );
-    } else if(type === "0" || type === "1" || type === "2") {
+    } else if(!hourly && (type === "0" || type === "1" || type === "2")) {
         return (
             <div className="weatherBody">
                 <p>Max temperature: <b>{weatherInformation.daily.temperature_2m_max[type]} ℃</b></p>
@@ -30,6 +26,22 @@ const WeatherInfo = ({type, weatherInformation}) => {
                 <p>Sunrise: <b>{weatherInformation.daily.sunrise[type].split("T")[1]}</b></p>
                 <p>Sunset: <b>{weatherInformation.daily.sunset[type].split("T")[1]}</b></p>
             </div>
+        )
+    } else if(hourly && (type === "0" || type === "1" || type === "2")) {
+        return (
+            <tbody>
+            {[...Array(24)].map((_, index) => (
+                <tr key={index}>
+                    <td >{weatherInformation.hourly.time[index].split('T')[1]}</td>
+                    <td className="temp">
+                        Temperature: <b>{weatherInformation.hourly.temperature_2m[index + (type * 24)]}</b> °C
+                    </td>
+                    <td className="temp">
+                        Precipitation: <b>{weatherInformation.hourly.precipitation_probability[index + (type * 24)]}</b> %
+                    </td>
+                </tr>
+            ))}
+            </tbody>
         )
     } else {
         return (
